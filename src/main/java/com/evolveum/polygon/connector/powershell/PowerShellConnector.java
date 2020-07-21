@@ -222,6 +222,7 @@ public class PowerShellConnector implements PoolableConnector, TestOp, ScriptOnR
         powerHell.setPassword(getWinRmPassword());
         powerHell.setAuthenticationScheme(getAuthenticationScheme());
         powerHell.setHostnameVerifier(hostnameVerifier);
+        powerHell.setDisableCertificateChecks(configuration.isDisableCertificateChecks());
     }
 
     private void setLocalParameters(PowerHellLocalExecImpl powerHell) {

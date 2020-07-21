@@ -118,6 +118,7 @@ public class PowerShellConfiguration extends AbstractConfiguration {
     public static final String ARGUMENT_STYLE_SLASHED = "slashed";
     public static final String ARGUMENT_STYLE_VARIABLES = "variables";
 
+    private boolean disableCertificateChecks = false;
 
     @ConfigurationProperty(order = 100)
     public String getScriptExecutionMechanism() {
@@ -198,6 +199,15 @@ public class PowerShellConfiguration extends AbstractConfiguration {
 
     public void setPowershellArgumentStyle(String powershellArgumentStyle) {
         this.powershellArgumentStyle = powershellArgumentStyle;
+    }
+
+    @ConfigurationProperty(order = 109)
+    public boolean isDisableCertificateChecks() {
+        return disableCertificateChecks;
+    }
+
+    public void setDisableCertificateChecks(boolean disableCertificateChecks) {
+        this.disableCertificateChecks = disableCertificateChecks;
     }
 
     @Override
