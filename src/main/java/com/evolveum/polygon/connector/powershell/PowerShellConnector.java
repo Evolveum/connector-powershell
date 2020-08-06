@@ -34,6 +34,7 @@ import org.identityconnectors.framework.spi.operations.ScriptOnResourceOp;
 import org.identityconnectors.framework.spi.operations.TestOp;
 
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.*;
@@ -272,7 +273,13 @@ public class PowerShellConnector implements PoolableConnector, TestOp, ScriptOnR
         }
         winRmUsername = getWinRmUsername();
         winRmHost = getWinRmHost();
-        hostnameVerifier = new DefaultHostnameVerifier(null);
+
+        if (configuration.isDisableCertificateChecks()) {
+            hostnameVerifier = new AllowAllHostnameVerifier();
+        } else {
+            hostnameVerifier = new DefaultHostnameVerifier(null);
+        }
+
         isWinRmInitialized = true;
     }
 
@@ -392,4 +399,10 @@ public class PowerShellConnector implements PoolableConnector, TestOp, ScriptOnR
         return sb.toString();
     }
 
+    private class AllowAllHostnameVerifier implements HostnameVerifier {
+        @Override
+        public boolean verify(String s, SSLSession sslSession) {
+            return true;
+        }
+    }
 }
