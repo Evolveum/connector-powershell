@@ -88,7 +88,7 @@
         <dependency>
           <groupId>com.evolveum.powerhell</groupId>
           <artifactId>powerhell</artifactId>
-          <version>1.1</version>
+          <version>1.2-SNAPSHOT</version>
           <exclusions>
                 <!-- Exclude SLF4J API from the lib to avoid bundling it with the
                      connector. The SLF4J is already part of midPoint.
